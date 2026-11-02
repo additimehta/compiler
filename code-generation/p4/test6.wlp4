@@ -1,0 +1,11 @@
+int wain(int a, int b) {
+  while (a < b) {
+    if (a % 2 == 0) {
+      a = a + 1;
+    } else {
+      a = a + 2;
+    }
+  }
+  return a;
+}
+

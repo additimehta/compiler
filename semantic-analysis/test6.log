@@ -1,0 +1,113 @@
+This is METAFONT, Version 2.71828182 (preloaded base=mf 2025.1.14)  14 NOV 2025 12:48
+**test6.wlp4 test7.wlp4 testing
+(test6.wlp4
+>> int.wain
+! Isolated expression.
+<to be read again> 
+                   (
+l.1 int wain(
+             int a, int b) {
+? ^^[:wq
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or ... or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? 
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.1 int wain(
+             int a, int b) {
+? :wq
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or ... or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? 
+! Interruption.
+l.1 int wain(
+             int a, int b) {
+? 
+>> int
+>> p
+! Not implemented: (unknown numeric)*(unknown numeric).
+<to be read again> 
+                   =
+l.3   int* p =
+               &x;
+? 
+! An expression can't begin with `&'.
+<inserted text> 
+                0
+<to be read again> 
+                   &
+l.3   int* p = &
+                x;
+? 
+>> 0
+>> x
+! Not implemented: (known numeric)&(unknown numeric).
+<to be read again> 
+                   ;
+l.3   int* p = &x;
+                  
+? 
+>> return
+>> p
+! Not implemented: (unknown numeric)*(unknown numeric).
+<to be read again> 
+                   ;
+l.4   return *p;
+                
+? 
+>> p
+! Isolated expression.
+<to be read again> 
+                   ;
+l.4   return *p;
+                
+? 
+! A statement can't begin with `}'.
+<to be read again> 
+                   }
+l.5 }
+     
+? 
+! Extra tokens will be flushed.
+<to be read again> 
+                   }
+l.5 }
+     
+? 
+)
+! File ended while scanning to the end of the statement.
+<inserted text> 
+                ;
+<*> test6.wlp4
+               test7.wlp4 testing
+? 
+
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*
+(Please type a command or say `end')
+*end
+

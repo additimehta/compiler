@@ -1,0 +1,5 @@
+wlp4scan < test1.wlp4 | wlp4parse | wlp4type > test1.wlp4ti && \
+g++ -std=c++17 -o wlp4gen wlp4gen.cc && \
+./wlp4gen < test1.wlp4ti > output.asm && \
+wlp4gen < test1.wlp4ti > expected.asm && \
+diff -u expected.asm output.asm

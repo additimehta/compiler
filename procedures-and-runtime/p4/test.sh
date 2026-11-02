@@ -1,0 +1,136 @@
+#!/bin/bash
+
+echo "=== Running tests for selected .wlp4 files ==="
+echo ""
+
+# Must provide at least one file
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 file1.wlp4 [file2.wlp4 ...]"
+    exit 1
+fi
+
+FILES=("$@")
+
+for INPUT in "${FILES[@]}"; do
+    
+    if [ ! -f "$INPUT" ]; then
+        echo "✗ ERROR: File not found: $INPUT"
+        continue
+    fi
+
+    BASE=$(basename "$INPUT" .wlp4)
+
+    echo "=============================================="
+    echo "=== Testing: $INPUT ==="
+    echo "=============================================="
+
+    # Step 1: Create .wlp4i
+    echo "Step 1: Parsing..."
+    if ! wlp4scan < "$INPUT" | wlp4parse > "${BASE}.wlp4i" 2> "${BASE}.parse_err"; then
+        echo "✗ Parsing failed!"
+        cat "${BASE}.parse_err"
+        continue
+    fi
+    echo "✓ Parsing passed"
+
+
+    # Step 2: Type checking
+    echo "Step 2: Type checking..."
+    if ! wlp4type < "${BASE}.wlp4i" > "${BASE}.wlp4ti" 2> "${BASE}.type_err"; then
+        echo "✗ Type checking crashed!"
+        cat "${BASE}.type_err"
+        continue
+    fi
+
+    if grep -q "ERROR" "${BASE}.wlp4ti"; then
+        echo "✗ Type checking failed"
+        continue
+    fi
+
+    echo "✓ Type checking passed"
+
+
+    # Step 3: Compile code generator
+    echo "Step 3: Compiling code generator..."
+    if ! g++ -std=c++17 -Wall -O2 -o wlp4gen wlp4gen.cc; then
+        echo "✗ Compilation failed!"
+        exit 1
+    fi
+    echo "✓ Code generator compiled"
+
+
+    # Step 4: Generate assembly
+    echo "Step 4: Generating assembly..."
+    if ! ./wlp4gen < "${BASE}.wlp4ti" 2>&1 | tee "${BASE}.asm"; then
+        echo "✗ Code generation failed!"
+        continue
+    fi
+    echo "✓ Assembly generated"
+
+
+    # Step 5: .import check → linkasm or binasm
+    if grep -q "^\.import" "${BASE}.asm"; then
+        echo "Step 5: Using linkasm..."
+        PRINT_MERL="print.merl"
+
+        if ! cs241.linkasm < "${BASE}.asm" > "${BASE}.merl"; then
+            echo "✗ linkasm failed!"
+            continue
+        fi
+
+        if ! cs241.linker "${BASE}.merl" "$PRINT_MERL" > "${BASE}.linked.merl"; then
+            echo "✗ linker failed!"
+            continue
+        fi
+
+        ACTUAL_FILE="${BASE}.linked.merl"
+
+    else
+        echo "Step 5: Using binasm..."
+
+        if ! cs241.binasm < "${BASE}.asm" > "${BASE}.mips"; then
+            echo "✗ Assembly failed!"
+            continue
+        fi
+
+        ACTUAL_FILE="${BASE}.mips"
+    fi
+
+
+    # Step 6: Expected output from wlp4 reference compiler
+    echo "Step 6: Generating expected output..."
+    if ! wlp4c < "$INPUT" > "${BASE}-expected.mips"; then
+        echo "✗ wlp4c failed!"
+        continue
+    fi
+
+    echo ""
+    echo "=== Step 7: Comparing behavior with input: 5 3 ==="
+    echo ""
+
+    ACTUAL_OUT=$(echo "5 3" | mips.twoints "$ACTUAL_FILE" 2>&1)
+    EXPECT_OUT=$(echo "5 3" | mips.twoints "${BASE}-expected.mips" 2>&1)
+
+    echo "Your output:"
+    echo "$ACTUAL_OUT"
+    echo ""
+    echo "Expected:"
+    echo "$EXPECT_OUT"
+    echo ""
+
+    ACTUAL_REG=$(echo "$ACTUAL_OUT" | grep '$03 = ' | sed 's/.*$03 = \([^ ]*\).*/\1/')
+    EXPECT_REG=$(echo "$EXPECT_OUT" | grep '$03 = ' | sed 's/.*$03 = \([^ ]*\).*/\1/')
+
+    if [ "$ACTUAL_REG" == "$EXPECT_REG" ]; then
+        echo "✓ PASS: Return values match."
+    else
+        echo "✗ FAIL: Return values differ"
+        echo "  Yours:    $ACTUAL_REG"
+        echo "  Expected: $EXPECT_REG"
+    fi
+
+    echo ""
+
+done
+
+echo "=== SELECTED TESTING COMPLETE ==="

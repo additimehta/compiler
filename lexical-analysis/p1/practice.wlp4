@@ -1,0 +1,89 @@
+
+int tieBreak(int x, int y) {
+  int absX = 0;
+  int absY = 0;
+  int winner = 0;
+
+  // compute abs(x)
+  if (x < 0) {
+    absX = 0 - x;
+  } else {
+    absX = x;
+  }
+
+  // compute abs(y)
+  if (y < 0) {
+    absY = 0 - y;
+  } else {
+    absY = y;
+  }
+
+  // compare absolute values
+  if (absX < absY) {
+    winner = x;
+  } else {
+    if (absY < absX) {
+      winner = y;
+    } else {
+      // same absolute value → pick negative one
+      if (x < 0) {
+        winner = x;
+      } else {
+        winner = y;
+      }
+    }
+  }
+
+  return winner;
+}
+
+int wain(int* arr, int n) {
+  int offset = 241;
+  int total = 483;          // range -241..241 inclusive
+  int* freq = NULL;
+  int i = 0;
+  int count = 0;
+  int maxCount = 0;
+  int candidate = 0;
+  int value = 0;
+  int idx = 0;
+  int chosen = 0;
+
+  // allocate and zero out frequency array
+  freq = new int[total];
+  while (i < total) {
+    *(freq + i) = 0;
+    i = i + 1;
+  }
+
+  // fill frequency array
+  i = 0;
+  while (i < n) {
+    value = *(arr + i);
+    idx = value + offset;
+    *(freq + idx) = *(freq + idx) + 1;
+    i = i + 1;
+  }
+
+  // find most frequent element using tieBreak
+  i = 0;
+  while (i < total) {
+    count = *(freq + i);
+    value = i - offset;
+
+    if (count > maxCount) {
+      maxCount = count;
+      chosen = value;
+    } else {
+      if (count == maxCount) {
+        chosen = tieBreak(chosen, value);
+      } else {
+        // do nothing
+      }
+    }
+
+    i = i + 1;
+  }
+
+  return chosen;
+}

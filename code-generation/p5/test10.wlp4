@@ -1,0 +1,16 @@
+int wain(int a, int b) {
+    int x = 3;
+    int y = 4;
+    int c = 5;
+    int d = 6;
+    x = a;
+    println(a);
+    b = x;
+    println(b);
+    y = y;
+    println(c);
+    c = d;
+    println(d);
+    d = y;
+    return d;
+}

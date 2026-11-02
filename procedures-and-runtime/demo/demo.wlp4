@@ -1,0 +1,36 @@
+int sumSquares(int* values, int count) {
+  int i = 0;
+  int total = 0;
+  int value = 0;
+  while (i < count) {
+    value = *(values + i);
+    total = total + value * value;
+    i = i + 1;
+  }
+  return total;
+}
+
+int wain(int* a, int b) {
+  int* copy = NULL;
+  int i = 0;
+  int original = 0;
+  int shifted = 0;
+  int result = 0;
+  original = sumSquares(a, b);
+  println(original);
+  copy = new int[b];
+  if (copy == NULL) {
+    println(0);
+    result = 0;
+  } else {
+    while (i < b) {
+      *(copy + i) = *(a + i) + 1;
+      i = i + 1;
+    }
+    shifted = sumSquares(copy, b);
+    println(shifted);
+    result = shifted - original;
+    delete [] copy;
+  }
+  return result;
+}

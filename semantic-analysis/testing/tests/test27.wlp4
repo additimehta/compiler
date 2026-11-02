@@ -1,0 +1,5 @@
+int wain(int a, int b) {
+  int* p = NULL;
+  int* q = p + p; // invalid type for initialization
+  return a;
+}

@@ -1,0 +1,85 @@
+start BOF procedures EOF
+BOF BOF
+procedures procedure procedures
+procedure INT ID LPAREN params RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+ID p
+LPAREN (
+params .EMPTY
+RPAREN )
+LBRACE {
+dcls .EMPTY
+statements .EMPTY
+RETURN return
+expr term
+term factor
+factor NUM
+NUM 241
+SEMI ;
+RBRACE }
+procedures procedure procedures
+procedure INT ID LPAREN params RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+ID q
+LPAREN (
+params .EMPTY
+RPAREN )
+LBRACE {
+dcls .EMPTY
+statements .EMPTY
+RETURN return
+expr term
+term factor
+factor ID LPAREN RPAREN
+ID p
+LPAREN (
+RPAREN )
+SEMI ;
+RBRACE }
+procedures procedure procedures
+procedure INT ID LPAREN params RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+ID r
+LPAREN (
+params .EMPTY
+RPAREN )
+LBRACE {
+dcls .EMPTY
+statements .EMPTY
+RETURN return
+expr term
+term factor
+factor ID LPAREN RPAREN
+ID q
+LPAREN (
+RPAREN )
+SEMI ;
+RBRACE }
+procedures main
+main INT WAIN LPAREN dcl COMMA dcl RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+WAIN wain
+LPAREN (
+dcl type ID
+type INT
+INT int
+ID a
+COMMA ,
+dcl type ID
+type INT
+INT int
+ID b
+RPAREN )
+LBRACE {
+dcls .EMPTY
+statements .EMPTY
+RETURN return
+expr term
+term factor
+factor ID LPAREN RPAREN
+ID r
+LPAREN (
+RPAREN )
+SEMI ;
+RBRACE }
+EOF EOF

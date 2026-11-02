@@ -1,0 +1,7 @@
+int wain(int a, int b) {
+  println(a);
+  putchar(10);     // newline
+  println(b);
+  return 0;
+}
+

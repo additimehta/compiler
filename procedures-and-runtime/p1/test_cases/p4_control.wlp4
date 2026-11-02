@@ -1,0 +1,10 @@
+int wain(int a, int b) {
+    if(a < b) {
+        while(a < b) {
+            a = a + 1;
+        }
+    } else { 
+        a = 241;
+    }
+    return a;
+}

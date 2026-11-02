@@ -1,0 +1,16 @@
+int *makeArray(int size) {
+  int *arr = NULL;
+  arr = new int[size];
+  return arr;
+}
+
+int wain(int a, int b) {
+  int *myArr = NULL;
+  myArr = makeArray(3);
+  *myArr = a;
+  *(myArr+1) = b;
+  *(myArr+2) = a + b;
+  a = *(myArr+2);
+  delete [] myArr;
+  return a;
+}

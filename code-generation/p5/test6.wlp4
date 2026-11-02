@@ -1,0 +1,5 @@
+int wain(int a, int b) {
+  println((a * 2) + (b * 3) - 5);
+  return 0;
+}
+

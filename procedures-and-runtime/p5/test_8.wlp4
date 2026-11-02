@@ -1,0 +1,19 @@
+int *allocate(int n) {
+  return new int[n];
+}
+
+int deallocate(int *arr) {
+  delete [] arr;
+  return 0;
+}
+
+int wain(int a, int b) {
+  int *arr = NULL;
+  int result = 0;
+  arr = allocate(2);
+  *arr = a;
+  *(arr+1) = b;
+  result = *arr + *(arr+1);
+  a = deallocate(arr);
+  return result;
+}

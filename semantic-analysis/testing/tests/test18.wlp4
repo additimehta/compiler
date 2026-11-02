@@ -1,0 +1,6 @@
+int wain(int a, int b) {
+  return f();   // f not declared yet
+}
+int f() {
+  return 1;
+}

@@ -1,0 +1,61 @@
+start BOF procedures EOF
+BOF BOF
+procedures main
+main INT WAIN LPAREN dcl COMMA dcl RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+WAIN wain
+LPAREN (
+dcl type ID
+type INT
+INT int
+ID a : int
+COMMA ,
+dcl type ID
+type INT
+INT int
+ID b : int
+RPAREN )
+LBRACE {
+dcls .EMPTY
+statements statements statement
+statements .EMPTY
+statement WHILE LPAREN test RPAREN LBRACE statements RBRACE
+WHILE while
+LPAREN (
+test expr GT expr
+expr term : int
+term factor : int
+factor ID : int
+ID a : int
+GT >
+expr term : int
+term factor : int
+factor ID : int
+ID b : int
+RPAREN )
+LBRACE {
+statements statements statement
+statements .EMPTY
+statement lvalue BECOMES expr SEMI
+lvalue ID : int
+ID b : int
+BECOMES =
+expr expr PLUS term : int
+expr term : int
+term factor : int
+factor ID : int
+ID b : int
+PLUS +
+term factor : int
+factor NUM : int
+NUM 1 : int
+SEMI ;
+RBRACE }
+RETURN return
+expr term : int
+term factor : int
+factor ID : int
+ID a : int
+SEMI ;
+RBRACE }
+EOF EOF

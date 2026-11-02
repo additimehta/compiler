@@ -1,0 +1,56 @@
+int wain(int num, int base) {
+  int result = 0;
+  int* digits = NULL;
+  int index = 0;
+  int remainder = 0;
+  int ch = 0;
+
+  digits = new int[32];
+
+  // Case 1: invalid number
+  if (num < 0) {
+    result = 1;
+  } else {
+    // Case 2: invalid base
+    if (base < 2) {
+      result = 2;
+    } else {
+      if (base > 36) {
+        result = 2;
+      } else {
+        // Case 3: number == 0
+        if (num == 0) {
+          putchar(48);  // '0'
+          putchar(10);  // newline
+          result = 0;
+        } else {
+          // Convert number to given base (stored in reverse)
+          while (num > 0) {
+            remainder = num % base;
+            *(digits + index) = remainder;
+            index = index + 1;
+            num = num / base;
+          }
+
+          // Print digits in reverse order
+          index = index - 1;
+          while (index >= 0) {
+            ch = *(digits + index);
+            if (ch < 10) {
+              putchar(ch + 48);  // '0' + digit
+            } else {
+              putchar(ch + 55);  // 'A' = 65, 65 - 10 = 55
+            }
+            index = index - 1;
+          }
+
+          putchar(10); // newline
+          result = 0;
+        }
+      }
+    }
+  }
+
+  delete [] digits;
+  return result;
+}

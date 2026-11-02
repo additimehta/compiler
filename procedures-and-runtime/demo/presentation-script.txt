@@ -1,0 +1,128 @@
+WLP4 Compiler Demo — Presentation Script
+
+1. INTRODUCTION
+
+Show: procedures-and-runtime/demo/simple.wlp4
+
+“This is a compiler I built in CS241. It translates WLP4, a small subset of C++, into MIPS machine code. I have also set up a local assembler, linker, and emulator so the complete demo can run on my Mac.
+
+This example takes two integers, adds them, prints the sum, and returns it. I’ll use the inputs 4 and 7, so the expected result is 11.
+
+I’ll follow the statement ‘total = a + b;’ through the compiler to show how source text becomes a parse tree and then executable code.”
+
+Example source:
+
+int wain(int a, int b) {
+  int total = 0;
+  total = a + b;
+  println(total);
+  return total;
+}
+
+2. SCANNING: SOURCE TEXT TO TOKENS
+
+Show: lexical-analysis/p3/wlp4scan.cc, around line 52
+Then show: procedures-and-runtime/demo/demo-output/simple.tokens, around line 16
+
+“My scanner reads the input character by character. It skips whitespace and comments, groups letters into identifiers, and checks whether each word is a reserved keyword. It also recognizes numbers and operators.
+
+Each token has a kind, describing its category, and a lexeme, containing its original text. Our example statement produces these tokens:”
+
+ID total
+BECOMES =
+ID a
+PLUS +
+ID b
+SEMI ;
+
+“We now have meaningful tokens, but we haven’t determined how they fit together.”
+
+3. PARSING: TOKENS TO A TREE
+
+Show: syntax-analysis/p5/wlp4parse.cc, around line 13
+
+struct ParseTree {
+    string val;
+    vector<ParseTree*> children;
+};
+
+“Each tree node stores either a token or a grammar rule, along with its children. My parser loads the WLP4 grammar and parsing tables. It maintains two stacks: one for parser states and one for symbols and their tree nodes.”
+
+Show: SHIFT and REDUCE sections, around lines 103 and 122
+
+“This is a bottom-up parser. A shift consumes the next token, creates a leaf node, and pushes it onto the stack.
+
+A reduction combines nodes according to a grammar rule. It pops the rule’s children, creates their parent, and pushes that parent back onto the stack.
+
+For example, ‘ID a’ becomes a factor, then a term, then an expression. Eventually, the parser combines the left expression, the plus token, and the right term using the rule ‘expr → expr PLUS term’.
+
+These steps build a tree representing the grammatical structure of the program. If the tokens cannot form a valid program, the parser reports an error.”
+
+4. SHOWING THE PARSE TREE
+
+Show: procedures-and-runtime/demo/demo-output/simple.wlp4i, around line 35
+
+expr expr PLUS term
+expr term
+term factor
+factor ID
+ID a
+PLUS +
+term factor
+factor ID
+ID b
+
+“My parser writes the tree using preorder traversal: the parent first, followed by its children from left to right.
+
+The first line identifies the addition rule. The following lines describe its left expression, plus token, and right term. This is a full parse tree, so it keeps grammar details such as factor and term nodes.”
+
+5. TYPE CHECKING
+
+Show: semantic-analysis/testing/wlp4type.cc, around line 315
+Optionally show: procedures-and-runtime/demo/demo-output/simple.wlp4ti
+
+“The type checker walks the tree and checks semantic rules. It tracks declared variables and their types, checks that operations have valid operands, and annotates expression nodes with their types.
+
+For ‘a + b’, both operands are integers, so the result is also an integer. This checked and annotated tree is the input to code generation.”
+
+6. CODE GENERATION AND REGISTERS
+
+Show: procedures-and-runtime/p5/wlp4gen.cc, genExpr, around line 583
+Then show: procedures-and-runtime/demo/demo-output/simple.asm, around line 37
+
+“The code generator walks the typed tree and emits MIPS assembly.
+
+For addition, it evaluates the left side and saves it on the stack. It evaluates the right side into register $3, restores the left value into $5, and emits ‘add $3, $5, $3’.
+
+Registers are small storage locations inside the simulated processor. Here, $3 holds expression results and the final return value. $29 is the frame pointer, which helps locate parameters and local variables. $30 is the stack pointer. My compiler keeps the constant 4 in $4, because an integer occupies four bytes.”
+
+Useful register notes:
+$0: always zero.
+$1 and $2: initially hold the two inputs. $1 also passes the argument to print.
+$3: expression result and final return value.
+$4: constant 4 in this compiler.
+$5: temporary register, including the left operand of addition.
+$11: constant 1 in this compiler.
+$29: frame pointer.
+$30: stack pointer.
+$31: return address for function calls.
+
+7. RUNNING THE DEMO
+
+From procedures-and-runtime/demo, run:
+
+bash test.sh --runner twoints --input '4 7' simple.wlp4
+
+“The script builds my scanner, parser, type checker, and code generator. It then assembles the generated MIPS and links the runtime libraries. Finally, the emulator executes the machine code.
+
+The program prints 11. In the final register dump, $03 is 0x0000000b. That is hexadecimal for 11, confirming that the program also returns 11.
+
+The register dump shows values after execution. Registers can change during the program: for example, $1 starts with 4, but later contains 11 because the printing function receives its argument there.”
+
+RECORDING NOTES
+
+Generate the output files before recording, so they are ready to show.
+Keep the source, scanner, parser, type checker, generator, and output files open in editor tabs.
+On macOS, press Command + Shift + 5 and select the recording area.
+Choose your microphone under Options to record narration.
+Stop with the menu-bar stop button or Command + Control + Escape.

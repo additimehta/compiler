@@ -1,0 +1,10 @@
+int wain(int a, int b) {
+  int *arr = NULL;
+  arr = new int[1000000];
+  if(arr == NULL) {
+    return 1;
+  } else {
+    delete [] arr;
+    return 0;
+  }
+}

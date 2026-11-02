@@ -1,0 +1,8 @@
+wlp4gen.cc: In function ‘ParseTree* buildTree(std::istream&)’:
+wlp4gen.cc:83:22: warning: unused variable ‘s’ [-Wunused-variable]
+   83 |     for (const auto& s : rhs) {
+      |                      ^
+wlp4gen.cc: In function ‘void genProcedure(ParseTree*)’:
+wlp4gen.cc:738:9: warning: unused variable ‘paramCount’ [-Wunused-variable]
+  738 |     int paramCount = processParams(params);
+      |         ^~~~~~~~~~

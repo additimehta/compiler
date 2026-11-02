@@ -1,0 +1,6 @@
+int f(int x) {
+  return;        // missing expression
+}
+int wain(int a, int b) {
+  return f(a);
+}

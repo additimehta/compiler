@@ -1,0 +1,18 @@
+. BOF x x x x x x x x x x EOF
+BOF . x x x x x x x x x x EOF
+BOF x . x x x x x x x x x EOF
+BOF x x . x x x x x x x x EOF
+BOF x x x . x x x x x x x EOF
+BOF x x x x . x x x x x x EOF
+BOF x x x x x . x x x x x EOF
+BOF x x x x x x . x x x x EOF
+BOF x x x x x x x . x x x EOF
+BOF x x x x x x x x . x x EOF
+BOF x x x x x x x x x . x EOF
+BOF x x x x x x x x x x . EOF
+BOF x x x x x x x x x A . EOF
+BOF x x x x x x A . EOF
+BOF x x x A . EOF
+BOF A . EOF
+BOF A EOF .
+X .

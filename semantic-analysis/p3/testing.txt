@@ -1,0 +1,5 @@
+wlp4scan < input.wlp4 | wlp4parse > input.wlp4i && \
+g++ -std=c++17 -o wlp4type wlp4type.cc && \
+./wlp4type < input.wlp4i > output.wlp4ti && \
+wlp4type < input.wlp4i > expected.wlp4ti \
+diff output.wlp4ti expected.wlp4ti

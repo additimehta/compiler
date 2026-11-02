@@ -1,0 +1,23 @@
+. BOF id - ( id - id ) - id EOF
+BOF . id - ( id - id ) - id EOF
+BOF id . - ( id - id ) - id EOF
+BOF term . - ( id - id ) - id EOF
+BOF expr . - ( id - id ) - id EOF
+BOF expr - . ( id - id ) - id EOF
+BOF expr - ( . id - id ) - id EOF
+BOF expr - ( id . - id ) - id EOF
+BOF expr - ( term . - id ) - id EOF
+BOF expr - ( expr . - id ) - id EOF
+BOF expr - ( expr - . id ) - id EOF
+BOF expr - ( expr - id . ) - id EOF
+BOF expr - ( expr - term . ) - id EOF
+BOF expr - ( expr . ) - id EOF
+BOF expr - ( expr ) . - id EOF
+BOF expr - term . - id EOF
+BOF expr . - id EOF
+BOF expr - . id EOF
+BOF expr - id . EOF
+BOF expr - term . EOF
+BOF expr . EOF
+BOF expr EOF .
+S .

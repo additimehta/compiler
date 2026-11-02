@@ -1,0 +1,59 @@
+int sumArray(int* arr, int len) {
+  int i;
+  int total;
+
+  i = 0;
+  total = 0;
+
+  while (i < len) {
+    total = total + *(arr + i);
+    i = i + 1;
+  }
+
+  return total;
+}
+
+int factorial(int n) {
+  int result;
+
+  if (n == 0) {
+    result = 1;
+  } else {
+    result = n * factorial(n - 1);
+  }
+
+  return result;
+}
+
+int modify(int* p) {
+  *p = *p + 10;
+  return *p;
+}
+
+int wain(int* a, int n) {
+  int* b;
+  int sum;
+  int fact;
+  int x;
+
+  b = new int[n];
+  x = 0;
+
+  while (x < n) {
+    *(b + x) = *(a + x) + x;
+    x = x + 1;
+  }
+
+  sum = sumArray(b, n);
+  println(sum);
+
+  fact = factorial(n);
+  println(fact);
+
+  x = modify(&sum);
+  println(x);
+
+  delete[] b;
+  return sum;
+}
+

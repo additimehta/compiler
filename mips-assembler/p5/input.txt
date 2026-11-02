@@ -1,0 +1,4 @@
+LABEL label:
+DIRECTIVE .word
+ID label
+NEWLINE

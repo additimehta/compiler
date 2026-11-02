@@ -1,0 +1,8 @@
+int wain(int a, int b) {
+  int total = 0;
+  total = a + b;
+  println(total);
+  return total;
+}
+
+source code -> tokens -> parse tree -> type checked -> code generation (machine language code)

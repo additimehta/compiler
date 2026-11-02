@@ -1,0 +1,36 @@
+.ALPHABET
+a l f 
+.STATES
+start
+seen_a
+seen_al
+seen_alf
+seen_alfa
+seen_alfal
+seen_alfalf
+seen_alfalfa!
+.TRANSITIONS
+start   a       seen_a
+start   l f     start
+seen_a  a       seen_a
+seen_a  l       seen_al
+seen_a  f       start
+seen_al a       seen_a
+seen_al l       start
+seen_al f       seen_alf
+seen_alf a      seen_alfa
+seen_alf l f    start
+seen_alfa a     seen_a
+seen_alfa l     seen_alfal
+seen_alfa f     start
+seen_alfal a    seen_a
+seen_alfal l    start
+seen_alfal f    seen_alfalf
+seen_alfalf a   seen_alfalfa
+seen_alfalf l f start
+seen_alfalfa a l f seen_alfalfa
+.INPUT
+alfalfalfalfa
+noalfalfalfhere
+alfalfa
+.EMPTY

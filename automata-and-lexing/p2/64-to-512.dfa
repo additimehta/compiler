@@ -1,0 +1,78 @@
+.ALPHABET
+- 0-9
+.STATES
+start
+neg
+zero!
+pos1_4!
+pos1_4_d2!
+pos1_4_d3!
+pos5!
+pos52_59!
+pos50!
+pos50_d3!
+pos51!
+pos51_d3!
+pos6_9!
+pos6_9_d2!
+neg1!
+neg1_d2!
+neg1_d3!
+neg2!
+neg20_24!
+neg20_24_d3!
+neg25!
+neg25_d3!
+neg26_29!
+neg3!
+neg3_d2!
+neg4_9!
+neg4_9_d2!
+.TRANSITIONS
+start - neg
+start 0 zero
+start 1-4 pos1_4
+start 5 pos5
+start 6-9 pos6_9
+neg 1 neg1
+neg 2 neg2
+neg 3 neg3
+neg 4-9 neg4_9
+neg1 0-9 neg1_d2
+neg1_d2 0-9 neg1_d3
+neg2 0-4 neg20_24
+neg2 5 neg25
+neg2 6-9 neg26_29
+neg20_24 0-9 neg20_24_d3
+neg25 0-6 neg25_d3
+neg3 0-9 neg3_d2
+neg4_9 0-9 neg4_9_d2
+pos1_4 0-9 pos1_4_d2
+pos1_4_d2 0-9 pos1_4_d3
+pos5 2-9 pos52_59
+pos5 0 pos50
+pos5 1 pos51
+pos50 0-9 pos50_d3
+pos51 0-2 pos51_d3
+pos6_9 0-9 pos6_9_d2
+.INPUT
+-256
+-100
+-30
+-25
+-9
+0
+7
+10
+99
+100
+255
+256
+512
+123
+.EMPTY
+-0
+00
+012
+05
+0512

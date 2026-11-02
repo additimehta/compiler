@@ -1,0 +1,9 @@
+int f() {
+  return 1;
+}
+int f() {        // duplicate
+  return 2;
+}
+int wain(int a, int b) {
+  return f();
+}

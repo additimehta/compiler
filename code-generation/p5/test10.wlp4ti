@@ -1,0 +1,150 @@
+start BOF procedures EOF
+BOF BOF
+procedures main
+main INT WAIN LPAREN dcl COMMA dcl RPAREN LBRACE dcls statements RETURN expr SEMI RBRACE
+INT int
+WAIN wain
+LPAREN (
+dcl type ID
+type INT
+INT int
+ID a : int
+COMMA ,
+dcl type ID
+type INT
+INT int
+ID b : int
+RPAREN )
+LBRACE {
+dcls dcls dcl BECOMES NUM SEMI
+dcls dcls dcl BECOMES NUM SEMI
+dcls dcls dcl BECOMES NUM SEMI
+dcls dcls dcl BECOMES NUM SEMI
+dcls .EMPTY
+dcl type ID
+type INT
+INT int
+ID x : int
+BECOMES =
+NUM 3 : int
+SEMI ;
+dcl type ID
+type INT
+INT int
+ID y : int
+BECOMES =
+NUM 4 : int
+SEMI ;
+dcl type ID
+type INT
+INT int
+ID c : int
+BECOMES =
+NUM 5 : int
+SEMI ;
+dcl type ID
+type INT
+INT int
+ID d : int
+BECOMES =
+NUM 6 : int
+SEMI ;
+statements statements statement
+statements statements statement
+statements statements statement
+statements statements statement
+statements statements statement
+statements statements statement
+statements statements statement
+statements statements statement
+statements statements statement
+statements .EMPTY
+statement lvalue BECOMES expr SEMI
+lvalue ID : int
+ID x : int
+BECOMES =
+expr term : int
+term factor : int
+factor ID : int
+ID a : int
+SEMI ;
+statement PRINTLN LPAREN expr RPAREN SEMI
+PRINTLN println
+LPAREN (
+expr term : int
+term factor : int
+factor ID : int
+ID a : int
+RPAREN )
+SEMI ;
+statement lvalue BECOMES expr SEMI
+lvalue ID : int
+ID b : int
+BECOMES =
+expr term : int
+term factor : int
+factor ID : int
+ID x : int
+SEMI ;
+statement PRINTLN LPAREN expr RPAREN SEMI
+PRINTLN println
+LPAREN (
+expr term : int
+term factor : int
+factor ID : int
+ID b : int
+RPAREN )
+SEMI ;
+statement lvalue BECOMES expr SEMI
+lvalue ID : int
+ID y : int
+BECOMES =
+expr term : int
+term factor : int
+factor ID : int
+ID y : int
+SEMI ;
+statement PRINTLN LPAREN expr RPAREN SEMI
+PRINTLN println
+LPAREN (
+expr term : int
+term factor : int
+factor ID : int
+ID c : int
+RPAREN )
+SEMI ;
+statement lvalue BECOMES expr SEMI
+lvalue ID : int
+ID c : int
+BECOMES =
+expr term : int
+term factor : int
+factor ID : int
+ID d : int
+SEMI ;
+statement PRINTLN LPAREN expr RPAREN SEMI
+PRINTLN println
+LPAREN (
+expr term : int
+term factor : int
+factor ID : int
+ID d : int
+RPAREN )
+SEMI ;
+statement lvalue BECOMES expr SEMI
+lvalue ID : int
+ID d : int
+BECOMES =
+expr term : int
+term factor : int
+factor ID : int
+ID y : int
+SEMI ;
+RETURN return
+expr term : int
+term factor : int
+factor ID : int
+ID d : int
+SEMI ;
+RBRACE }
+EOF EOF

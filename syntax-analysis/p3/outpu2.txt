@@ -1,0 +1,5 @@
+. ( KIT TEN )
+( . KIT TEN )
+( KIT . TEN )
+( KIT TEN . )
+( animal . )
